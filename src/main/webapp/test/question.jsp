@@ -30,7 +30,8 @@
     <span><security:authentication var="sid" property="principal.username"/></span>
     <form role="form" action="${pageContext.request.contextPath}/test/question/answer" method="POST">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <input type="hidden" name="qid" value="${question[0].id}">
+<%--        <input type="hidden" name="qid" value="${question[0].id}">--%>
+        <input type="hidden" name="qid" value="123">
         选择语言：<select id="languageName" name="languageName" onclick="switchLanguage()">
             <option value="java">Java</option>
             <option value="cpp">C++</option>

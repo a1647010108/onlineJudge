@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface TestsMapper extends BaseMapper<Tests> {
 
+    int insertTestInfo(Tests testInfo);
 }
