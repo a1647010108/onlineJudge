@@ -35,6 +35,7 @@
         选择语言：<select id="languageName" name="languageName" onclick="switchLanguage()">
             <option value="java">Java</option>
             <option value="cpp">C++</option>
+            <option value="python">python</option>
         </select>
         <p id="languageDescription">语言：Java，输入输出流：System.In 和 System.Out，主类：Main，函数：标准 main 函数。</p>
         <div class="form-group">
@@ -42,6 +43,7 @@
         </div>
         <pre id="javaCode" style="display: none"><%@include file="../js/test/defaultJavaCode.txt" %></pre>
         <pre id="cppCode" style="display: none"><%@include file="../js/test/defaultCppCode.txt" %></pre>
+        <pre id="pythonCode" style="display: none"><%@include file="../js/test/defaultPythonCode.txt" %></pre>
         <button class="btn btn-success" type="submit">提交代码</button>
     </form>
 </div>

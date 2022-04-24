@@ -5,6 +5,7 @@ import com.example.onlineJudge.entity.*;
 import com.example.onlineJudge.service.Test.CppTest;
 import com.example.onlineJudge.service.Test.JavaTest;
 import com.example.onlineJudge.service.Test.LanguageTest;
+import com.example.onlineJudge.service.Test.PythonTest;
 import com.example.onlineJudge.util.DataAccessObject;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author BlackBox
@@ -32,7 +33,7 @@ public class TestsController {
     private Tests Tests;
 
     @RequestMapping("/question")
-    String UsersControllerLogin(){
+    String UsersControllerLogin() {
         return "/test/question";
     }
 
@@ -40,7 +41,19 @@ public class TestsController {
     public String question(int qid, String code, String languageName, Model model) throws IOException {
         long createTime = System.currentTimeMillis();
         LanguageTest languageTest = null;
-        languageTest = new JavaTest(1 , qid, code, createTime);
+
+        switch (languageName) {
+            case "java":
+                languageTest = new JavaTest(1, qid, code, createTime);
+                break;
+            case "cpp":
+                languageTest = new CppTest(1, qid, code, createTime);
+                break;
+            case "python":
+                languageTest = new PythonTest(1, qid, code, createTime);
+                break;
+        }
+
         String result = languageTest.compile();
 
         if (result != null) {
@@ -82,7 +95,7 @@ public class TestsController {
                 languageTest = new CppTest(user.getId(), qid, code, createTime);
                 break;
         }
-        if(languageTest == null) throw new IllegalArgumentException("languageName = " + languageName);
+        if (languageTest == null) throw new IllegalArgumentException("languageName = " + languageName);
         String result = languageTest.compile();
         if (result != null) {
             model.addAttribute("code", code);

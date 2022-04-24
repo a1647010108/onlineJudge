@@ -69,12 +69,26 @@
 <!--            <artifactId>spring-boot-starter-security</artifactId>-->
 <!--        </dependency>-->
 
-
         <!-- 代码生成器模板 -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
+
+        <!-- lombok插件 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- h2依赖 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>

@@ -3,14 +3,15 @@ package com.example.onlineJudge.service.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CppTest extends LanguageTest {
+public class PythonTest extends LanguageTest {
 
-    public CppTest(int uid, int qid, String code, long submitTime) {
+    public PythonTest(int uid, int qid, String code, long submitTime) {
         super(uid, qid, code, submitTime);
     }
 
     @Override
     protected List<String> getCompileCommands() {
+
         ArrayList<String> compileCommands = new ArrayList<>();
         compileCommands.add("docker");
         compileCommands.add("run");
@@ -19,10 +20,11 @@ public class CppTest extends LanguageTest {
         compileCommands.add("root");
         compileCommands.add("-v");
         compileCommands.add(String.format("%s:%s", dockerCodeDir, dockerCodeDir));
-        compileCommands.add("gcc:9");
+        compileCommands.add("python:3");
         compileCommands.add("/bin/sh");
         compileCommands.add("-c");
-        compileCommands.add(String.format("cd %s&&g++ Main.cpp", dockerCodeDir));
+        compileCommands.add(String.format("cd %s&& python -m py_compile Main.py", dockerCodeDir));
+
         return compileCommands;
     }
 
@@ -37,16 +39,16 @@ public class CppTest extends LanguageTest {
         executeCommands.add("root");
         executeCommands.add("-v");
         executeCommands.add(String.format("%s:%s", dockerCodeDir, dockerCodeDir));
-        executeCommands.add("gcc:9");
+        executeCommands.add("python:3");
         executeCommands.add("/bin/sh");
         executeCommands.add("-c");
-        executeCommands.add(String.format("cd %s&&timeout 3s ./a.out", dockerCodeDir));
+        executeCommands.add(String.format("cd %s  &&python Main.py", dockerCodeDir));
         return executeCommands;
     }
 
     @Override
     protected String getCodeFileName() {
-        return "Main.cpp";
+        return "Main.py";
     }
 
 //    public static void main(String[] args) throws IOException {
