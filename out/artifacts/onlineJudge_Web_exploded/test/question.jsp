@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <title>题目</title>
+    <title>题目1</title>
 </head>
 <body>
 <%@include file="../common/navbar.jspf" %>

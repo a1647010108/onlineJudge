@@ -2,20 +2,28 @@ package com.example.onlineJudge.controller;
 
 import com.example.onlineJudge.Exception.CRUDException;
 import com.example.onlineJudge.entity.*;
+import com.example.onlineJudge.mapper.QuestionsMapper;
+import com.example.onlineJudge.mapper.Test_dataMapper;
 import com.example.onlineJudge.service.Test.CppTest;
 import com.example.onlineJudge.service.Test.JavaTest;
 import com.example.onlineJudge.service.Test.LanguageTest;
 import com.example.onlineJudge.service.Test.PythonTest;
 import com.example.onlineJudge.util.DataAccessObject;
+import org.apache.ibatis.jdbc.Null;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -32,9 +40,22 @@ public class TestsController {
     private DataAccessObject dao;
     private Tests Tests;
 
-    @RequestMapping("/question")
-    String UsersControllerLogin() {
+    @Autowired
+    private QuestionsMapper questionsMapper;
+
+    @RequestMapping(value = "/question",method = RequestMethod.GET)
+    String UsersControllerLogin(Model model) {
+        List<Questions> questionsList = questionsMapper.selectList(null);
+        model.addAttribute("name", questionsList.get(0).getName());
+        model.addAttribute("description", questionsList.get(0).getDescription());
         return "/test/question";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/questions",method = RequestMethod.GET)
+    Questions UsersControllerLogins() {
+        List<Questions> questionsList = questionsMapper.selectList(null);
+        return questionsList.get(0);
     }
 
     @RequestMapping(value = "/question/answer", method = RequestMethod.POST)
@@ -64,8 +85,8 @@ public class TestsController {
         System.out.println(languageTest.getOutput());
         ArrayList<InputOutput> inputOutputs = new ArrayList<>();
         InputOutput inputOutput1 = new InputOutput();
-        inputOutput1.setInput("123");
-        inputOutput1.setOutput("123");
+        inputOutput1.setInput("1234");
+        inputOutput1.setOutput("1234");
         inputOutputs.add(inputOutput1);
         TestInfo testInfo = languageTest.execute(inputOutputs);
         model.addAttribute("code", code);

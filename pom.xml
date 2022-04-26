@@ -75,6 +75,14 @@
             <artifactId>freemarker</artifactId>
         </dependency>
 
+        <!-- 热部署工具 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
         <!-- lombok插件 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
